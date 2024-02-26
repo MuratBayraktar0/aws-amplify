@@ -8,8 +8,7 @@ body {
 }
 
 #root {
-  width: 100%;
-  height: 100%;
+  display: flex;
 }
 
 .App {
@@ -30,4 +29,16 @@ body {
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.profile-frame {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: fit-content;
+  margin: auto;
+  padding: 10px;
+}
+
+.auth-frame {
+  margin: auto;
+  height: 100%;
 }
