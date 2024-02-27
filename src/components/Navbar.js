@@ -50,7 +50,7 @@ function Navbar({ children, name, family_name, signOut }) {
   // };
 
   return (
-    <div>
+    <div className="nav">
       <AppBar component="nav">
         <Container maxWidth="lg">
           <Toolbar disableGutters>

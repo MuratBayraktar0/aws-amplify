@@ -1,0 +1,14 @@
+{
+  "resourceName": "todoDB",
+  "tableName": "todo",
+  "partitionKey": {
+    "fieldName": "id",
+    "fieldType": "number"
+  },
+  "sortKey": {
+    "fieldName": "context",
+    "fieldType": "string"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}
