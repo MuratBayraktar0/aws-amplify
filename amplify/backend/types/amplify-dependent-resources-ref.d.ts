@@ -1,6 +1,6 @@
 export type AmplifyDependentResourcesAttributes = {
   "api": {
-    "todo": {
+    "apiTodo": {
       "ApiId": "string",
       "ApiName": "string",
       "RootUrl": "string"
@@ -18,7 +18,7 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "function": {
-    "todo": {
+    "lambdaTodo": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",
@@ -27,14 +27,12 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "storage": {
-    "todoDB": {
+    "dbTodo": {
       "Arn": "string",
       "Name": "string",
       "PartitionKeyName": "string",
       "PartitionKeyType": "string",
       "Region": "string",
-      "SortKeyName": "string",
-      "SortKeyType": "string",
       "StreamArn": "string"
     }
   }

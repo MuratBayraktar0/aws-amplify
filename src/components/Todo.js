@@ -5,9 +5,10 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import { get } from "aws-amplify/api";
+import { get, del, post } from "aws-amplify/api";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
+import { TextField, Button } from "@mui/material";
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -18,16 +19,55 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
 }));
 
 function Todo({ title }) {
-  const [todos, setTodos] = useState(null);
+  const [todos, setTodos] = useState([]);
+  const [context, setContext] = useState("");
+  const [addSuccess, setAddSuccess] = useState(true);
+  const [deleteSuccess, setDeleteSuccess] = useState(true);
 
   useEffect(() => {
     get({
-      apiName: "todo",
-      path: "/todo",
+      apiName: "apiTodo",
+      path: "/todos",
     })
       .response.then((res) => res.body.json())
       .then((json) => setTodos(json));
   }, []);
+
+  const handleDeleteTodo = (id) => {
+    del({
+      apiName: "apiTodo",
+      path: `/todos/object/${id}`,
+    })
+      .response.then((res) => {
+        const filteredTodos = todos.filter((todo) => todo.id !== id);
+        setTodos(filteredTodos);
+        setDeleteSuccess(true);
+      })
+      .catch((err) => setDeleteSuccess(false));
+  };
+
+  const handleAddTodo = (context) => {
+    const todo = {
+      id: todos[0] ? todos[0].id + 1 : 0,
+      context: context,
+      check: false,
+    };
+    post({
+      apiName: "apiTodo",
+      path: "/todos",
+      options: {
+        body: todo,
+      },
+    })
+      .response.then((res) => res.statusCode)
+      .then((json) => {
+        setTodos((prevTodos) => [todo].concat(prevTodos));
+        setAddSuccess(true);
+      })
+      .catch((err) => {
+        setAddSuccess(false);
+      });
+  };
 
   return (
     <div>
@@ -36,8 +76,46 @@ function Todo({ title }) {
       <Box
         className="profile-frame"
         sx={{ flexGrow: 1, overflow: "hidden", px: 3 }}
-        style={{ backgroundColor: "rgb(25,118,210)", borderRadius: "3px" }}
+        style={{
+          backgroundColor: "rgb(25,118,210)",
+          borderRadius: "3px",
+        }}
       >
+        <StyledPaper
+          sx={{
+            mx: "auto",
+            m: 2,
+            p: 0,
+            bgcolor: "rgb(25,118,210)",
+          }}
+        >
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "auto auto",
+              columnGap: "10px",
+            }}
+          >
+            <TextField
+              id="todo-field"
+              label="Add a todo..."
+              variant="filled"
+              style={{ backgroundColor: "white" }}
+              onChange={(e) => setContext(e.target.value)}
+            />
+            <Button
+              variant="contained"
+              style={{
+                backgroundColor: "white",
+                color: "rgb(25,118,210)",
+                fontWeight: "bold",
+              }}
+              onClick={() => handleAddTodo(context)}
+            >
+              Add
+            </Button>
+          </div>
+        </StyledPaper>
         {todos
           ? todos.map((todo) => (
               <StyledPaper
@@ -47,6 +125,7 @@ function Todo({ title }) {
                   p: 2,
                   m: 2,
                 }}
+                key={todo.id + "-" + todo.context}
               >
                 <Grid container wrap="nowrap" spacing={2}>
                   <Grid
@@ -62,11 +141,10 @@ function Todo({ title }) {
                     }}
                   >
                     <Typography noWrap>
-                      <b key={todo.id} style={{ fontSize: "21px" }}>
-                        {todo["context"]}
-                      </b>
+                      <b style={{ fontSize: "21px" }}>{todo["context"]}</b>
                     </Typography>
                     <IconButton
+                      onClick={() => handleDeleteTodo(todo["id"])}
                       aria-label="delete"
                       style={{
                         boxShadow:

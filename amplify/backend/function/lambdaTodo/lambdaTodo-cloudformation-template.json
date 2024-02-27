@@ -16,13 +16,13 @@
     "s3Key": {
       "Type": "String"
     },
-    "storagetodoDBName": {
+    "storagedbTodoName": {
       "Type": "String",
-      "Default": "storagetodoDBName"
+      "Default": "storagedbTodoName"
     },
-    "storagetodoDBArn": {
+    "storagedbTodoArn": {
       "Type": "String",
-      "Default": "storagetodoDBArn"
+      "Default": "storagedbTodoArn"
     }
   },
   "Conditions": {
@@ -55,12 +55,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "todo",
+            "lambdaTodo",
             {
               "Fn::Join": [
                 "",
                 [
-                  "todo",
+                  "lambdaTodo",
                   "-",
                   {
                     "Ref": "env"
@@ -97,12 +97,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "awsamplifyLambdaRole84c1ce9c",
+            "awsamplifyLambdaRolef8e2a550",
             {
               "Fn::Join": [
                 "",
                 [
-                  "awsamplifyLambdaRole84c1ce9c",
+                  "awsamplifyLambdaRolef8e2a550",
                   "-",
                   {
                     "Ref": "env"
@@ -182,14 +182,14 @@
               ],
               "Resource": [
                 {
-                  "Ref": "storagetodoDBArn"
+                  "Ref": "storagedbTodoArn"
                 },
                 {
                   "Fn::Join": [
                     "/",
                     [
                       {
-                        "Ref": "storagetodoDBArn"
+                        "Ref": "storagedbTodoArn"
                       },
                       "index/*"
                     ]

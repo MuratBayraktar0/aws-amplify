@@ -1,6 +1,6 @@
 {
   "api": {
-    "todo": {
+    "apiTodo": {
       "dependsOn": [
         {
           "attributes": [
@@ -8,7 +8,7 @@
             "Arn"
           ],
           "category": "function",
-          "resourceName": "todo"
+          "resourceName": "lambdaTodo"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -44,7 +44,7 @@
     }
   },
   "function": {
-    "todo": {
+    "lambdaTodo": {
       "build": true,
       "dependsOn": [
         {
@@ -57,7 +57,7 @@
             "Arn"
           ],
           "category": "storage",
-          "resourceName": "todoDB"
+          "resourceName": "dbTodo"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -65,25 +65,25 @@
     }
   },
   "parameters": {
-    "AMPLIFY_function_todo_deploymentBucketName": {
+    "AMPLIFY_function_lambdaTodo_deploymentBucketName": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "todo"
+          "resourceName": "lambdaTodo"
         }
       ]
     },
-    "AMPLIFY_function_todo_s3Key": {
+    "AMPLIFY_function_lambdaTodo_s3Key": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "todo"
+          "resourceName": "lambdaTodo"
         }
       ]
     }
   },
   "storage": {
-    "todoDB": {
+    "dbTodo": {
       "providerPlugin": "awscloudformation",
       "service": "DynamoDB"
     }
