@@ -5,10 +5,10 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import { get, del, post } from "aws-amplify/api";
+import { get, del, post, put } from "aws-amplify/api";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, Checkbox } from "@mui/material";
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -23,6 +23,7 @@ function Todo({ title }) {
   const [context, setContext] = useState("");
   const [addSuccess, setAddSuccess] = useState(true);
   const [deleteSuccess, setDeleteSuccess] = useState(true);
+  const [updateSuccess, setUpdateSuccess] = useState(true);
 
   useEffect(() => {
     get({
@@ -31,7 +32,7 @@ function Todo({ title }) {
     })
       .response.then((res) => res.body.json())
       .then((json) => setTodos(json));
-  }, []);
+  }, [todos]);
 
   const handleDeleteTodo = (id) => {
     del({
@@ -52,6 +53,7 @@ function Todo({ title }) {
       context: context,
       check: false,
     };
+
     post({
       apiName: "apiTodo",
       path: "/todos",
@@ -66,6 +68,29 @@ function Todo({ title }) {
       })
       .catch((err) => {
         setAddSuccess(false);
+      });
+  };
+
+  const handleUpdateTodo = (todo, index) => {
+    put({
+      apiName: "apiTodo",
+      path: `/todos`,
+      options: {
+        body: {
+          id: todo.id,
+          context: todo.context,
+          check: !todos[index].check,
+        },
+      },
+    })
+      .response.then((res) => res.statusCode)
+      .then((json) => {
+        todos[index].check = !todos[index].check;
+
+        setUpdateSuccess(true);
+      })
+      .catch((err) => {
+        setUpdateSuccess(false);
       });
   };
 
@@ -117,7 +142,7 @@ function Todo({ title }) {
           </div>
         </StyledPaper>
         {todos
-          ? todos.map((todo) => (
+          ? todos.map((todo, index) => (
               <StyledPaper
                 sx={{
                   my: 1,
@@ -125,7 +150,7 @@ function Todo({ title }) {
                   p: 2,
                   m: 2,
                 }}
-                key={todo.id + "-" + todo.context}
+                key={index}
               >
                 <Grid container wrap="nowrap" spacing={2}>
                   <Grid
@@ -140,8 +165,14 @@ function Todo({ title }) {
                       width: "300px",
                     }}
                   >
+                    <Checkbox
+                      key={index}
+                      checked={todo.check}
+                      onChange={() => handleUpdateTodo(todo, index)}
+                    />
+
                     <Typography noWrap>
-                      <b style={{ fontSize: "21px" }}>{todo["context"]}</b>
+                      <b style={{ fontSize: "21px" }}>{todo.context}</b>
                     </Typography>
                     <IconButton
                       onClick={() => handleDeleteTodo(todo["id"])}

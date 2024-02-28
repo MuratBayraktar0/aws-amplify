@@ -44,11 +44,6 @@ function Navbar({ children, name, family_name, signOut }) {
     navigate("profile");
   };
 
-  // const handleSignOut = (e) => {
-  //   setAnchorElUser(null);
-  //   navigate("");
-  // };
-
   return (
     <div className="nav">
       <AppBar component="nav">
