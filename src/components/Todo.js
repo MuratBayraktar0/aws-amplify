@@ -64,6 +64,7 @@ function Todo({ title }) {
       .response.then((res) => res.statusCode)
       .then((json) => {
         setTodos((prevTodos) => [todo].concat(prevTodos));
+        setContext("");
         setAddSuccess(true);
       })
       .catch((err) => {
@@ -126,6 +127,7 @@ function Todo({ title }) {
               label="Add a todo..."
               variant="filled"
               style={{ backgroundColor: "white" }}
+              value={context}
               onChange={(e) => setContext(e.target.value)}
             />
             <Button
