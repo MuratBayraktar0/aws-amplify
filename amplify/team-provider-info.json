@@ -19,7 +19,7 @@
       "function": {
         "lambdaTodo": {
           "deploymentBucketName": "amplify-awsamplify-dev-54804-deployment",
-          "s3Key": "amplify-builds/lambdaTodo-704e3541346a4251664b-build.zip"
+          "s3Key": "amplify-builds/lambdaTodo-5a56716c3133424c704d-build.zip"
         }
       },
       "storage": {
