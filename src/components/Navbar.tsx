@@ -15,17 +15,21 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { useNavigate } from "react-router-dom";
-import { AuthEventData } from '@aws-amplify/ui';
+import { AuthEventData } from "@aws-amplify/ui";
 
 type NavbarProps = {
   name: string;
   family_name: string;
-  signOut: ((data?: AuthEventData | undefined) => void) | undefined
+  signOut: ((data?: AuthEventData | undefined) => void) | undefined;
 };
 
 function Navbar({ name, family_name, signOut }: NavbarProps) {
-  const [anchorElNav, setAnchorElNav] = useState<EventTarget | null | undefined>();
-  const [anchorElUser, setAnchorElUser] = useState<EventTarget | null | undefined>();
+  const [anchorElNav, setAnchorElNav] = useState<
+    EventTarget | null | undefined
+  >();
+  const [anchorElUser, setAnchorElUser] = useState<
+    EventTarget | null | undefined
+  >();
   const navigate = useNavigate();
 
   const handleCloseNavMenu = () => {
@@ -124,13 +128,17 @@ function Navbar({ name, family_name, signOut }: NavbarProps) {
 
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
-                <IconButton onClick={(event) => setAnchorElUser(event?.currentTarget)} sx={{ p: 0 }}>
+                <IconButton
+                  onClick={(event) => setAnchorElUser(event?.currentTarget)}
+                  sx={{ p: 0 }}
+                >
                   <AccountCircleIcon style={{ fontSize: "50px" }} />
                 </IconButton>
               </Tooltip>
               <Menu
                 sx={{ mt: "45px" }}
                 id="menu-appbar"
+                anchorEl={anchorElUser}
                 anchorOrigin={{
                   vertical: "top",
                   horizontal: "right",
@@ -143,10 +151,12 @@ function Navbar({ name, family_name, signOut }: NavbarProps) {
                 open={Boolean(anchorElUser)}
                 onClose={() => setAnchorElUser(null)}
               >
-                <MenuItem onClick={() => {
-                  setAnchorElUser(null);
-                  navigate("profile");
-                }}>
+                <MenuItem
+                  onClick={() => {
+                    setAnchorElUser(null);
+                    navigate("profile");
+                  }}
+                >
                   <Typography>Profile</Typography>
                 </MenuItem>
                 <MenuItem onClick={signOut}>

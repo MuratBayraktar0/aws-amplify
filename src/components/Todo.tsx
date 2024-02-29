@@ -26,13 +26,6 @@ type Todo = {
 function Todo() {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [context, setContext] = useState("");
-  const [addSuccess, setAddSuccess] = useState(true);
-  const [deleteSuccess, setDeleteSuccess] = useState(true);
-  const [updateSuccess, setUpdateSuccess] = useState(true);
-
-  console.log(addSuccess);
-  console.log(deleteSuccess);
-  console.log(updateSuccess);
 
   useEffect(() => {
     get({
@@ -51,9 +44,8 @@ function Todo() {
       .response.then(() => {
         const filteredTodos = todos.filter((todo) => todo.id !== id);
         setTodos(filteredTodos);
-        setDeleteSuccess(true);
       })
-      .catch(() => setDeleteSuccess(false));
+      .catch((err) => console.log(err));
   };
 
   const handleAddTodo = (context: string) => {
@@ -74,11 +66,8 @@ function Todo() {
       .then(() => {
         setTodos((prevTodos) => [todo].concat(prevTodos));
         setContext("");
-        setAddSuccess(true);
       })
-      .catch(() => {
-        setAddSuccess(false);
-      });
+      .catch((err) => console.log(err));
   };
 
   const handleUpdateTodo = (todo: Todo, index: number) => {
@@ -96,12 +85,8 @@ function Todo() {
       .response.then((res) => res.statusCode)
       .then(() => {
         todos[index].check = !todos[index].check;
-
-        setUpdateSuccess(true);
       })
-      .catch(() => {
-        setUpdateSuccess(false);
-      });
+      .catch((err) => console.log(err));
   };
 
   return (
