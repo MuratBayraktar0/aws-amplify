@@ -1,0 +1,7 @@
+{
+  "dev": {
+    "configLevel": "project",
+    "useProfile": false,
+    "awsConfigFilePath": "/home/murat/.amplify/awscloudformation/qkX0L3XBSZ"
+  }
+}

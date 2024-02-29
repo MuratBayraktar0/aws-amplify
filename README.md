@@ -1,70 +1,46 @@
-# Getting Started with Create React App
+# Full Stack React and Node.js Project using AWS Amplify
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a full stack React and Node.js application built using AWS Amplify. The project allows users to sign in with user credentials using AWS Cognito and then perform CRUD operations on a todo list.
 
-## Available Scripts
+## AWS Services Used
 
-In the project directory, you can run:
+- **AWS Cognito:** Used for user authentication and management.
+- **AWS Lambda Functions:** Used for backend business logic.
+- **Amazon DynamoDB:** Used as the database.
+- **AWS API Gateway:** Used to create and manage APIs.
 
-### `npm start`
+## Project Overview
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The application's purpose and functionalities:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Purpose:** The purpose of this application is to provide users with a platform to manage their todo lists. Users can sign in securely with their credentials and perform CRUD operations on their todo items.
+- **Functionality:**
+    - User Authentication: Users can sign in securely using AWS Cognito.
+    - Todo List Management: Users can create, read, update, and delete todo items.
+    - Secure Backend: Backend logic is handled using AWS Lambda functions, ensuring data security and integrity.
+    - Data Persistence: Todo items are stored in Amazon DynamoDB, providing a scalable and reliable database solution.
+    - API Management: AWS API Gateway is used to manage APIs, enabling seamless communication between the frontend and backend.
 
-### `npm test`
+## Setup, Deployment, and Testing Procedures
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Setup:**
+    1. Clone the repository to your local machine.
+    2. Navigate to the `aws-amplify` directory and run `npm install` to install frontend dependencies.
+    3. Navigate to the `apmlify` directory and run `amplify init` to initialize the backend environment.
+    4. Run `amplify push` to deploy the backend resources.
+    5. Run `npm start` in the `aws-amplify` directory to start the frontend server.
 
-### `npm run build`
+- **Deployment:** This project can be deployed using AWS Amplify. After setting up the Amplify environment and pushing the changes, the application will be automatically deployed to the specified environments (e.g., development, production).
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **Testing:** Unit tests, integration tests, and end-to-end tests can be implemented using testing frameworks such as Jest, Cypress, Taiko with Gauge. Test scripts can be added to the `aws-amplify` and `amplify` directories to ensure the functionality and reliability of the application.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Design Decisions and Assumptions
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **Frontend Design:** The frontend is designed using Vita and written in TypeScript to ensure type safety and code maintainability. The user interface follows modern design principles to provide a seamless user experience.
+- **Backend Design:** The backend is designed using Amplify CLI to quickly set up and deploy AWS resources. AWS Lambda functions are used for business logic to ensure scalability and cost-effectiveness.
+- **Assumptions:** It is assumed that users have basic knowledge of React, Node.js, and AWS services. Additionally, it is assumed that users have access to an AWS account to deploy the application.
 
-### `npm run eject`
+## Development and Production Environments
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- **Development URL:** [https://development.damp5lp6hzs3t.amplifyapp.com](https://development.damp5lp6hzs3t.amplifyapp.com)
+- **Production URL:** [https://main.damp5lp6hzs3t.amplifyapp.com](https://main.damp5lp6hzs3t.amplifyapp.com)
