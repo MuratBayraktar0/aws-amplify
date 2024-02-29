@@ -138,7 +138,7 @@ function Navbar({ name, family_name, signOut }: NavbarProps) {
               <Menu
                 sx={{ mt: "45px" }}
                 id="menu-appbar"
-                anchorEl={anchorElUser}
+                anchorEl={anchorElUser as Element}
                 anchorOrigin={{
                   vertical: "top",
                   horizontal: "right",
